@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TextInput, Button, FlatList } from "react-native";
-import { db } from "./firebaseConfig";
+import { db } from "../../firebaseConfig";
+import { signOut } from "firebase/auth";
+
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc,} from "firebase/firestore";
 
 export default function App() {
@@ -81,6 +83,10 @@ export default function App() {
             </View>
           </View>
         )}
+        <Button
+            title="Sair"
+            onPress={() => }
+        />
       />
     </View>
   );
