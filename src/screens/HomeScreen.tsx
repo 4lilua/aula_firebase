@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TextInput, Button, FlatList } from "react-native";
 import { db } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
+import {auth} from '../../firebaseConfig'
 
-import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc,} from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, } from "firebase/firestore";
 
 export default function App() {
   const [mensagens, setMensagens] = useState<any[]>([]);
@@ -83,10 +84,11 @@ export default function App() {
             </View>
           </View>
         )}
-        <Button
-            title="Sair"
-            onPress={() => }
-        />
+
+      />
+      <Button
+        title="Sair"
+        onPress={() => {signOut(auth)}}
       />
     </View>
   );

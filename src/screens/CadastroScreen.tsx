@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+
 export default function CadastroScreen({ navigation }) {
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
@@ -32,7 +33,7 @@ const cadastrar = async () => {
                 secureTextEntry
                 style={styles.input}
             />
-            {erro ? <Text style={styles.error}>{erro}</Text> : null
+            {erro ? <Text style={styles.error}>{erro}</Text> : null}
             <Button title="Cadastrar" onPress={cadastrar} />
             <Button title="Voltar ao Login" onPress={() => navigation.goBack()} />
         </View>

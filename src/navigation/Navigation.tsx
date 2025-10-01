@@ -1,39 +1,53 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { styles } from './styles';
 
 import LoginScreen from '../screens/LoginScreen';
 import CadastroScreen from '../screens/CadastroScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
-export function Navigator() {
-    const[usuario, setUsuario] = useState(null);
-    const[usuario, setUsuario] = useState(true);
-    useEffect(() => {
-        const teste =
-        onAuthStateChanged(auth, (user) => {
-            
-        })
-    })
+export default function Navigator() {
+  const [usuario, setUsuario] = useState(null);
+  const [carrega, setCarrega] = useState(true);
+  useEffect(() => {
+    const teste =
+      onAuthStateChanged(auth, (user) => {
+        setUsuario(user);
+        setCarrega(false);
+      });
+    return () => teste();
+  }, []);
+
+  if(carrega){
+    return(null);
+  }
+
   return (
     <NavigationContainer>
-        <Stack.Navigator>
-            <StackScreen name='Home'>
+      <Stack.Navigator>
+        {usuario ? (
+          <Stack.Screen name='Home'>
+            {(props) =>
+              <HomeScreen {...props} usuario={usuario} />
+            }
 
-            </StackScreen>
-            <StackScreen name='nome'd>
-                
-            </StackScreen>
-            <StackScreen name='nome'>
-                
-            </StackScreen>
-        </Stack.Navigator>
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen name='Login' component={LoginScreen}>
+
+            </Stack.Screen>
+            <Stack.Screen name='Cadastro' component={CadastroScreen}>
+
+            </Stack.Screen>
+          </>
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
-    <View style={styles.container}>
-
-    </View>
   );
 }

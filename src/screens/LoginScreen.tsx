@@ -5,7 +5,7 @@ import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import {auth} from '../../firebaseConfig';
 
-export function LoginScreen({navigation}) {
+export default function LoginScreen({navigation}) {
     const[email, setEmail] = useState("");
     const[senha, setSenha] = useState("");
     const[erro, setErro] = useState("");
@@ -20,7 +20,7 @@ export function LoginScreen({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Cadastro</Text>
+            <Text style={styles.title}>Login</Text>
             <TextInput
                 placeholder="Email"
                 value={email}
